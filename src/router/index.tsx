@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
       },
       // add route objects here
       {
-        path: "/metalab",
+        path: "metalab",
         element: <MetalabPage />,
       },
     ],

@@ -1,0 +1,10 @@
+.wrapper {
+  @apply overflow-hidden font-bri bg-gray-950;
+
+  .time-wrapper {
+    @apply fixed z-10 top-[1.5rem] right-[1.5rem] flex items-center;
+    .time {
+      @apply text-white text-xs text-[200] font-bri;
+    }
+  }
+}
