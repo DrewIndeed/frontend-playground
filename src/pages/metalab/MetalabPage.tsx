@@ -78,7 +78,7 @@ export default function MetalabPage() {
       </div>
 
       {/* introduction */}
-      <p className="absolute  top-[12rem] right-[16.3rem] scale-y-[0.9] font-bri text-[16.75px] font-light text-white tracking-tighter">
+      <p className="intro">
         Since 2006, we've helped the most
         <br />
         innovative startups and reputable
