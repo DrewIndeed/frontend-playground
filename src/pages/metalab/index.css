@@ -14,4 +14,8 @@
       @apply block w-fit text-[0.95em] py-[0.5rem];
     }
   }
+
+  .main-text {
+    @apply absolute select-none font-com text-[7.25em] font-light text-white tracking-tighter;
+  }
 }
