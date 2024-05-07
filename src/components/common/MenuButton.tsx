@@ -7,6 +7,8 @@ type P = {
   className?: string;
   prefixClassName?: string;
   childrenClassName?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
 export default function MenuButton({
@@ -15,9 +17,13 @@ export default function MenuButton({
   prefix,
   prefixClassName,
   childrenClassName,
+  onMouseEnter,
+  onMouseLeave,
 }: P) {
   return (
     <button
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       type="button"
       className={cn("flex items-center justify-between menu-btn", className)}
     >
