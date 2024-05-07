@@ -43,3 +43,11 @@ img {
   height: auto;
 }
 /* reset css */
+
+/* utils */
+@layer utilities {
+  .screen {
+    @apply h-screen w-screen;
+  }
+}
+/* utils */
