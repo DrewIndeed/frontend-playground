@@ -22,7 +22,7 @@ export default function MetalabPage() {
 
   // methods
   const play = debounce(() => vidRef.current && vidRef.current.play(), 100);
-  const pause = debounce(() => vidRef.current && vidRef.current.pause(), 100);
+  const pause = debounce(() => vidRef.current && vidRef.current.pay(), 100);
 
   // render
   return (
@@ -78,6 +78,15 @@ export default function MetalabPage() {
       </div>
 
       {/* introduction */}
+      <p className="absolute  top-[12rem] right-[16.3rem] scale-y-[0.9] font-bri text-[16.75px] font-light text-white tracking-tighter">
+        Since 2006, we've helped the most
+        <br />
+        innovative startups and reputable
+        <br />
+        brands design, build, and ship
+        <br />
+        products worth talking about.
+      </p>
     </div>
   );
 }
