@@ -22,7 +22,7 @@ export default function MetalabPage() {
 
   // methods
   const play = debounce(() => vidRef.current && vidRef.current.play(), 100);
-  const pause = debounce(() => vidRef.current && vidRef.current.pay(), 100);
+  const pause = debounce(() => vidRef.current && vidRef.current.pause(), 100);
 
   // render
   return (
@@ -40,10 +40,12 @@ export default function MetalabPage() {
       </div>
 
       {/* We make interface phrase */}
-      <h1 className="main-text flex-center bottom-[12rem] mr-[4rem] right-0 left-0">
+      <h1 className="main-text flex-center bottom-[12rem] xl:mr-[7rem] mr-[1rem] right-0 left-0">
         We make
       </h1>
-      <h1 className="main-text bottom-[6.5rem] left-[50%]">interfaces</h1>
+      <h1 className="main-text bottom-[6.5rem] xl:left-[48%] left-[52%]">
+        interfaces
+      </h1>
 
       {/* navigation bar */}
       <MenuButton className="fixed top-[1.5rem] left-[1.5rem]">Menu</MenuButton>
