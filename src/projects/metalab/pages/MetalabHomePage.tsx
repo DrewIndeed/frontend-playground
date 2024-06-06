@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import debounce from "lodash.debounce";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
-import BgVideo from "@/assets/bg.mp4";
-import { Logo } from "@/assets/logo";
-import { Mail } from "@/assets/mail";
-import MenuButton from "@/components/common/MenuButton";
+import BgVideo from "@/assets/metalab/bg.mp4";
+import { Logo } from "@/assets/metalab/logo";
+import { Mail } from "@/assets/metalab/mail";
 import useCurrentTime from "@/hooks/useCurrentTime";
 
-import "./index.css";
-import gsap from "gsap";
+import MenuButton from "../components/common/MenuButton";
+import "../index.css";
 
-export default function MetalabPage() {
+export default function MetalabHomePage() {
   // refs
   const vidRef = useRef<HTMLVideoElement>(null);
 
