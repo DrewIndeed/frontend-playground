@@ -99,6 +99,7 @@ export default function MetalabPage() {
         <div className="menu-items-wrapper">
           {menuItems.map((item) => (
             <MenuButton
+              key={item}
               onMouseEnter={pause}
               onMouseLeave={play}
               className="item"

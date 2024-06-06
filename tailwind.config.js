@@ -13,7 +13,7 @@ export default {
           "0%": {
             width: 10,
             height: "80dvh",
-            borderRadius: "1.5rem",
+            borderRadius: "2rem",
           },
           "100%": {
             width: "100dvw",
