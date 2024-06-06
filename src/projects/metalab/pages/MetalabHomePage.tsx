@@ -18,6 +18,13 @@ export default function MetalabHomePage() {
   // hooks
   const [currTime] = useCurrentTime();
 
+  // consts
+  const menuItems = ["Uber", "Calvin Klein", "The Athletic"];
+
+  // methods
+  const play = debounce(() => vidRef.current && vidRef.current.play(), 100);
+  const pause = debounce(() => vidRef.current && vidRef.current.pause(), 100);
+
   // effects
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,15 +45,12 @@ export default function MetalabHomePage() {
         }
       );
     });
-    return () => ctx.revert();
+    const startVid = setTimeout(() => play(), 2100);
+    return () => {
+      ctx.revert();
+      clearTimeout(startVid);
+    };
   }, []);
-
-  // consts
-  const menuItems = ["Uber", "Calvin Klein", "The Athletic"];
-
-  // methods
-  const play = debounce(() => vidRef.current && vidRef.current.play(), 100);
-  const pause = debounce(() => vidRef.current && vidRef.current.pause(), 100);
 
   // render
   return (
@@ -54,10 +58,10 @@ export default function MetalabHomePage() {
       <div className="wrapper animate-pageIn bg-[#7f7f7e]">
         {/* video background */}
         <video
-          className="bg-[#7f7f7e] brightness-75 contrast-125 absolute w-auto min-w-full min-h-full max-w-none"
+          className="bg-[#7f7f7e] brightness-75 contrast-125 absolute w-full h-full"
           ref={vidRef}
           src={BgVideo}
-          autoPlay
+          // autoPlay
           muted
           loop
         />
