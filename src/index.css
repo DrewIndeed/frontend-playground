@@ -62,7 +62,6 @@ video {
   .screen {
     @apply h-screen w-screen;
   }
-
   .full {
     @apply h-full w-full;
   }

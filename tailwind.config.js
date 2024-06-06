@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       animation: {
-        pageIn: "pageIn 2s ease-in-out forwards",
+        pageIn: "pageIn 2.1s ease-in-out forwards",
       },
       keyframes: () => ({
         pageIn: {

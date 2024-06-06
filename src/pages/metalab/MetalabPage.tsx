@@ -24,7 +24,7 @@ export default function MetalabPage() {
       gsap.to(".main-menu-btn", {
         opacity: 1,
         duration: 0.2,
-        delay: 2,
+        delay: 2.1,
         ease: "power3.easeInOut",
       });
       gsap.fromTo(
@@ -33,7 +33,7 @@ export default function MetalabPage() {
         {
           opacity: 1,
           duration: 0.2,
-          delay: 2.25,
+          delay: 2.2,
           ease: "power3.easeInOut",
         }
       );
@@ -51,10 +51,10 @@ export default function MetalabPage() {
   // render
   return (
     <div className="flex-center screen">
-      <div className="wrapper animate-pageIn">
+      <div className="wrapper animate-pageIn bg-[#7f7f7e]">
         {/* video background */}
         <video
-          className="brightness-75 contrast-125 absolute w-auto min-w-full min-h-full max-w-none"
+          className="bg-[#7f7f7e] brightness-75 contrast-125 absolute w-auto min-w-full min-h-full max-w-none"
           ref={vidRef}
           src={BgVideo}
           autoPlay
