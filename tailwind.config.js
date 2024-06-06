@@ -6,17 +6,20 @@ export default {
   theme: {
     extend: {
       animation: {
-        fadeIn: "fadeIn 0.2s ease-in-out forwards",
-        fadeOut: "fadeOut 0.2s ease-in-out forwards",
+        pageIn: "pageIn 2s ease-in-out forwards",
       },
       keyframes: () => ({
-        fadeIn: {
-          "0%": { opacity: 0 },
-          "100%": { opacity: 1 },
-        },
-        fadeOut: {
-          "0%": { opacity: 1, display: "initial" },
-          "100%": { opacity: 0, display: "none" },
+        pageIn: {
+          "0%": {
+            width: 10,
+            height: "80dvh",
+            borderRadius: "1.5rem",
+          },
+          "100%": {
+            width: "100dvw",
+            height: "100dvh",
+            borderRadius: 0,
+          },
         },
       }),
     },

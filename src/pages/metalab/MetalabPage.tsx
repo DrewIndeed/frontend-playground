@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import debounce from "lodash.debounce";
 
 import BgVideo from "@/assets/bg.mp4";
@@ -9,6 +9,7 @@ import MenuButton from "@/components/common/MenuButton";
 import useCurrentTime from "@/hooks/useCurrentTime";
 
 import "./index.css";
+import gsap from "gsap";
 
 export default function MetalabPage() {
   // refs
@@ -16,6 +17,29 @@ export default function MetalabPage() {
 
   // hooks
   const [currTime] = useCurrentTime();
+
+  // effects
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(".main-menu-btn", {
+        opacity: 1,
+        duration: 0.2,
+        delay: 2,
+        ease: "power3.easeInOut",
+      });
+      gsap.fromTo(
+        [".logo-wrapper", ".time-wrapper", ".menu-items-wrapper"],
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.2,
+          delay: 2.25,
+          ease: "power3.easeInOut",
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
 
   // consts
   const menuItems = ["Uber", "Calvin Klein", "The Athletic"];
@@ -26,69 +50,75 @@ export default function MetalabPage() {
 
   // render
   return (
-    <div className="screen wrapper">
-      {/* video background */}
-      <div className="absolute screen">
+    <div className="flex-center screen">
+      <div className="wrapper animate-pageIn">
+        {/* video background */}
         <video
-          className="brightness-75 contrast-125"
+          className="brightness-75 contrast-125 absolute w-auto min-w-full min-h-full max-w-none"
           ref={vidRef}
           src={BgVideo}
           autoPlay
           muted
           loop
         />
-      </div>
 
-      {/* We make interface phrase */}
-      <h1 className="main-text flex-center bottom-[12rem] xl:mr-[7rem] mr-[1rem] right-0 left-0">
-        We make
-      </h1>
-      <h1 className="main-text bottom-[6.5rem] xl:left-[48%] left-[52%]">
-        interfaces
-      </h1>
+        {/* We make interface phrase */}
+        <h1 className="main-text flex-center bottom-[12rem] xl:mr-[7rem] mr-[1rem] right-0 left-0">
+          We make
+        </h1>
+        <h1 className="main-text bottom-[6.5rem] xl:left-[48%] left-[52%]">
+          interfaces
+        </h1>
 
-      {/* navigation bar */}
-      <MenuButton className="fixed top-[1.5rem] left-[1.5rem]">Menu</MenuButton>
-      <div className="logo-wrapper">
-        <Link to="/metalab">
-          <Logo className="logo" />
-        </Link>
-      </div>
-      <div className="time-wrapper">
-        <div className="time">{currTime}</div>
-        <MenuButton
-          prefix={
-            <div className="text-white mr-2 transition-all duration-300">
-              Get in Touch
-            </div>
-          }
-          className="p-1.5 ml-[0.75rem] w-[25px] h-[25px] hover:w-[105px] overflow-hidden"
-          prefixClassName="shrink-0 fixed right-[16px] w-max pb-[1px]"
-          childrenClassName="fixed right-[5.5px]"
-        >
-          <Mail className="text-white w-[12px] h-[12px]" />
+        {/* navigation bar */}
+        <MenuButton className="main-menu-btn opacity-0 fixed top-[1.5rem] left-[1.5rem]">
+          Menu
         </MenuButton>
-      </div>
-
-      {/* menu items */}
-      <div className="menu-items-wrapper">
-        {menuItems.map((item) => (
-          <MenuButton onMouseEnter={pause} onMouseLeave={play} className="item">
-            {item}
+        <div className="logo-wrapper">
+          <Link to="/metalab">
+            <Logo className="logo" />
+          </Link>
+        </div>
+        <div className="time-wrapper">
+          <div className="time">{currTime}</div>
+          <MenuButton
+            prefix={
+              <div className="text-white mr-2 transition-all duration-300">
+                Get in Touch
+              </div>
+            }
+            className="email"
+            prefixClassName="shrink-0 fixed right-[16px] w-max pb-[1px]"
+            childrenClassName="fixed right-[5.5px]"
+          >
+            <Mail className="text-white w-[12px] h-[12px]" />
           </MenuButton>
-        ))}
-      </div>
+        </div>
 
-      {/* introduction */}
-      <p className="intro">
-        Since 2006, we've helped the most
-        <br />
-        innovative startups and reputable
-        <br />
-        brands design, build, and ship
-        <br />
-        products worth talking about.
-      </p>
+        {/* menu items */}
+        <div className="menu-items-wrapper">
+          {menuItems.map((item) => (
+            <MenuButton
+              onMouseEnter={pause}
+              onMouseLeave={play}
+              className="item"
+            >
+              {item}
+            </MenuButton>
+          ))}
+        </div>
+
+        {/* introduction */}
+        <p className="intro">
+          Since 2006, we've helped the most
+          <br />
+          innovative startups and reputable
+          <br />
+          brands design, build, and ship
+          <br />
+          products worth talking about.
+        </p>
+      </div>
     </div>
   );
 }

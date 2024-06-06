@@ -1,10 +1,13 @@
 .wrapper {
-  @apply overflow-hidden font-bri bg-gray-950;
+  @apply overflow-hidden font-bri bg-gray-950 relative;
 
   .time-wrapper {
     @apply fixed z-10 top-[1.5rem] right-[1.5rem] flex items-center;
     .time {
       @apply text-white text-xs text-[200] font-bri;
+    }
+    .email {
+      @apply p-1.5 ml-[0.75rem] w-[25px] h-[25px] hover:w-[105px] overflow-hidden;
     }
   }
 
@@ -16,10 +19,10 @@
   }
 
   .main-text {
-    @apply absolute scale-y-[1.025] select-none font-com text-[7.15em] font-light text-white tracking-tighter;
+    @apply fixed scale-y-[1.025] select-none font-com text-[7.15em] font-light text-white tracking-tighter;
   }
 
   .intro {
-    @apply absolute select-none top-[12rem] right-[17%] xl:right-[24%] scale-y-[0.9] font-bri text-[16.75px] font-light text-white tracking-tighter;
+    @apply fixed select-none top-[12rem] right-[17%] xl:right-[24%] scale-y-[0.9] font-bri text-[16.75px] font-light text-white tracking-tighter;
   }
 }
