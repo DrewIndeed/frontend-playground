@@ -1,29 +1,37 @@
 import gsap from "gsap";
 import debounce from "lodash.debounce";
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 import BgVideo from "@/assets/metalab/bg.mp4";
-import { Logo } from "@/assets/metalab/logo";
-import { Mail } from "@/assets/metalab/mail";
-import useCurrentTime from "@/hooks/useCurrentTime";
-
+import HomeMainContent from "../components/HomeMainContent";
 import MenuButton from "../components/common/MenuButton";
+import { MenuItems } from "../constants/HomeData";
+
+import { cn } from "@/utils/classname.util";
 import "../index.css";
 
 export default function MetalabHomePage() {
   // refs
   const vidRef = useRef<HTMLVideoElement>(null);
 
-  // hooks
-  const [currTime] = useCurrentTime();
-
-  // consts
-  const menuItems = ["Uber", "Calvin Klein", "The Athletic"];
+  // states
+  const [hoveringKey, setHoveringKey] = useState("");
+  const [previousThumbnail, setPreviousThumbnail] = useState("");
 
   // methods
-  const play = debounce(() => vidRef.current && vidRef.current.play(), 100);
-  const pause = debounce(() => vidRef.current && vidRef.current.pause(), 100);
+  const play = debounce(() => {
+    setTimeout(() => {
+      vidRef.current && vidRef.current.play();
+    }, 300); // THIS CAN BE ADJUSTED
+    setHoveringKey("");
+  }, 100);
+  const pause = debounce((key: string) => {
+    setTimeout(() => {
+      vidRef.current && vidRef.current.pause();
+      setHoveringKey(key);
+      setPreviousThumbnail(MenuItems[key]?.thumbnail);
+    }, 300);
+  }, 100);
 
   // effects
   useEffect(() => {
@@ -45,11 +53,12 @@ export default function MetalabHomePage() {
         }
       );
     });
-    const startVid = setTimeout(() => play(), 2100);
+    const startVid = setTimeout(() => play(), 2100); // 2.1s
     return () => {
       ctx.revert();
       clearTimeout(startVid);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // render
@@ -65,64 +74,38 @@ export default function MetalabHomePage() {
           muted
           loop
         />
-
-        {/* We make interface phrase */}
-        <h1 className="main-text flex-center bottom-[12rem] xl:mr-[7rem] mr-[1rem] right-0 left-0">
-          We make
-        </h1>
-        <h1 className="main-text bottom-[6.5rem] xl:left-[48%] left-[52%]">
-          interfaces
-        </h1>
-
-        {/* navigation bar */}
-        <MenuButton className="main-menu-btn opacity-0 fixed top-[1.5rem] left-[1.5rem]">
-          Menu
-        </MenuButton>
-        <div className="logo-wrapper">
-          <Link to="/metalab">
-            <Logo className="logo" />
-          </Link>
-        </div>
-        <div className="time-wrapper">
-          <div className="time">{currTime}</div>
-          <MenuButton
-            prefix={
-              <div className="text-white mr-2 transition-all duration-300">
-                Get in Touch
-              </div>
-            }
-            className="email"
-            prefixClassName="shrink-0 fixed right-[16px] w-max pb-[1px]"
-            childrenClassName="fixed right-[5.5px]"
-          >
-            <Mail className="text-white w-[12px] h-[12px]" />
-          </MenuButton>
-        </div>
-
+        {/* hover target content */}
+        <div
+          style={{
+            backgroundImage: `url(${
+              MenuItems[hoveringKey]?.thumbnail || previousThumbnail
+            })`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
+          }}
+          className={cn(
+            "hover-target-content absolute w-screen h-screen brightness-[.6] contrast-125 animate-fadeIn",
+            { "animate-fadeOut": hoveringKey.length === 0 }
+          )}
+        ></div>
         {/* menu items */}
         <div className="menu-items-wrapper">
-          {menuItems.map((item) => (
-            <MenuButton
-              key={item}
-              onMouseEnter={pause}
-              onMouseLeave={play}
-              className="item"
-            >
-              {item}
-            </MenuButton>
-          ))}
+          {Object.keys(MenuItems).map((key) => {
+            return (
+              <MenuButton
+                key={MenuItems[key].id}
+                onMouseEnter={() => pause(key)}
+                onMouseLeave={play}
+                className="item"
+              >
+                {MenuItems[key].title}
+              </MenuButton>
+            );
+          })}
         </div>
-
-        {/* introduction */}
-        <p className="intro">
-          Since 2006, we've helped the most
-          <br />
-          innovative startups and reputable
-          <br />
-          brands design, build, and ship
-          <br />
-          products worth talking about.
-        </p>
+        {/* main content, disappear when hovering menu items */}
+        <HomeMainContent hideText={hoveringKey.length > 0} />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@
   }
 
   .menu-items-wrapper {
-    @apply px-[1.5rem] fixed left-0 h-full gap-[0.35rem] flex flex-col justify-center;
+    @apply z-20 px-[1.5rem] fixed left-0 h-full gap-[0.35rem] flex flex-col justify-center;
     .item {
       @apply block w-fit text-[0.95em] py-[0.5rem];
     }
