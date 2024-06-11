@@ -20,17 +20,13 @@ export default function MetalabHomePage() {
 
   // methods
   const play = debounce(() => {
-    setTimeout(() => {
-      vidRef.current && vidRef.current.play();
-    }, 300); // THIS CAN BE ADJUSTED
+    vidRef.current && vidRef.current.play();
     setHoveringKey("");
   }, 100);
   const pause = debounce((key: string) => {
-    setTimeout(() => {
-      vidRef.current && vidRef.current.pause();
-      setHoveringKey(key);
-      setPreviousThumbnail(MenuItems[key]?.thumbnail);
-    }, 300);
+    vidRef.current && vidRef.current.pause();
+    setHoveringKey(key);
+    setPreviousThumbnail(MenuItems[key]?.thumbnail);
   }, 100);
 
   // effects
@@ -58,7 +54,7 @@ export default function MetalabHomePage() {
       ctx.revert();
       clearTimeout(startVid);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // render
